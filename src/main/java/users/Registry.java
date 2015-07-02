@@ -8,7 +8,7 @@ public class Registry {
 		this.registeredUsers = registeredUsers;
 	}
 
-	public void register (final String userName) {
+	public void register (final String userName) throws AlreadyRegisteredUserException {
 		registeredUsers.add(new User(userName));
 	}
 }

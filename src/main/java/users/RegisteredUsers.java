@@ -1,5 +1,5 @@
 package users;
 
 public interface RegisteredUsers {
-	void add (User user);
+	void add (User user) throws AlreadyRegisteredUserException;
 }
