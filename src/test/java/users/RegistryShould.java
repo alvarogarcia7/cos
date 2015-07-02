@@ -15,12 +15,13 @@ public class RegistryShould {
 	public void register_a_user () {
 		final RegisteredUsers registeredUsers = context.mock(RegisteredUsers.class);
 		final Registry registry = new Registry(registeredUsers);
+		final String userName = "user_name";
 
 		context.checking(new Expectations() {{
-			oneOf (registeredUsers).add(new User("user_name"));
+			oneOf (registeredUsers).add(new User(userName));
 		}});
 
-		registry.register("user_name");
+		registry.register(userName);
 	}
 
 }
