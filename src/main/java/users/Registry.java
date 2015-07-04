@@ -9,12 +9,9 @@ public class Registry {
 	}
 
 	public void register (final String userName) throws AlreadyRegisteredUserException {
-		final User user = from(userName);
+		final User user = User.from(userName);
 		registeredUsers.isValid(user);
 		registeredUsers.add(user);
 	}
 
-	private static User from (final String userName) {
-		return new User(userName);
-	}
 }

@@ -7,6 +7,10 @@ public class User {
 		this.userName = userName;
 	}
 
+	static User from (final String userName) {
+		return new User(userName);
+	}
+
 	@Override
 	public boolean equals (final Object o) {
 		if (this == o) return true;
