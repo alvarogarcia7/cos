@@ -13,6 +13,7 @@ public class RegistryShould {
 	public JUnitRuleMockery context = new JUnitRuleMockery();
 	private RegisteredUsers registeredUsers;
 	private Registry registry;
+	public static final String USER_NAME = "user_name";
 
 	@Before
 	public void setUp () throws Exception {
@@ -22,28 +23,26 @@ public class RegistryShould {
 
 	@Test
 	public void register_a_user () throws AlreadyRegisteredUserException {
-		final String userName = "user_name";
 
 		context.checking(new Expectations() {{
-			oneOf (registeredUsers).add(new User(userName));
+			oneOf (registeredUsers).add(new User(USER_NAME));
 			allowing(registeredUsers);
 		}});
 
-		registry.register(userName);
+		registry.register(USER_NAME);
 	}
 
 	@Test(expected = AlreadyRegisteredUserException.class)
 	public void not_register_an_already_registered_user () throws AlreadyRegisteredUserException {
-		final String userName = "user_name";
 
 		context.checking(new Expectations() {{
-			exactly(1).of(registeredUsers).add(new User(userName));
-			exactly(1).of(registeredUsers).add(new User(userName)); will(throwException(new AlreadyRegisteredUserException()));
+			exactly(1).of(registeredUsers).add(new User(USER_NAME));
+			exactly(1).of(registeredUsers).add(new User(USER_NAME)); will(throwException(new AlreadyRegisteredUserException()));
 			allowing(registeredUsers);
 		}});
 
-		registry.register(userName);
-		registry.register(userName);
+		registry.register(USER_NAME);
+		registry.register(USER_NAME);
 	}
 
 }
