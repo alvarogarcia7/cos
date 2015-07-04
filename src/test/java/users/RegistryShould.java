@@ -19,6 +19,7 @@ public class RegistryShould {
 
 		context.checking(new Expectations() {{
 			oneOf (registeredUsers).add(new User(userName));
+			allowing(registeredUsers);
 		}});
 
 		registry.register(userName);
@@ -33,7 +34,7 @@ public class RegistryShould {
 		context.checking(new Expectations() {{
 			exactly(1).of(registeredUsers).add(new User(userName));
 			exactly(1).of(registeredUsers).add(new User(userName)); will(throwException(new AlreadyRegisteredUserException()));
-
+			allowing(registeredUsers);
 		}});
 
 		registry.register(userName);
