@@ -14,6 +14,7 @@ public class RegistryShould {
 	private RegisteredUsers registeredUsers;
 	private Registry registry;
 	public static final String USER_NAME = "user_name";
+	public static final User USER = User.from(USER_NAME);
 
 	@Before
 	public void setUp () throws Exception {
@@ -25,7 +26,7 @@ public class RegistryShould {
 	public void register_a_user () throws AlreadyRegisteredUserException {
 
 		context.checking(new Expectations() {{
-			oneOf (registeredUsers).add(new User(USER_NAME));
+			oneOf (registeredUsers).add(USER);
 			allowing(registeredUsers);
 		}});
 
@@ -36,8 +37,8 @@ public class RegistryShould {
 	public void not_register_an_already_registered_user () throws AlreadyRegisteredUserException {
 
 		context.checking(new Expectations() {{
-			exactly(1).of(registeredUsers).add(new User(USER_NAME));
-			exactly(1).of(registeredUsers).add(new User(USER_NAME)); will(throwException(new AlreadyRegisteredUserException()));
+			exactly(1).of(registeredUsers).add(USER);
+			exactly(1).of(registeredUsers).add(USER); will(throwException(new AlreadyRegisteredUserException()));
 			allowing(registeredUsers);
 		}});
 
