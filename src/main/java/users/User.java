@@ -3,7 +3,7 @@ package users;
 public class User {
 	private final String userName;
 
-	public User (final String userName) {
+	private User (final String userName) {
 		this.userName = userName;
 	}
 
