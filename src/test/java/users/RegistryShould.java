@@ -3,6 +3,7 @@ package users;
 
 import org.jmock.Expectations;
 import org.jmock.integration.junit4.JUnitRuleMockery;
+import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 
@@ -10,11 +11,17 @@ import org.junit.Test;
 public class RegistryShould {
 	@Rule
 	public JUnitRuleMockery context = new JUnitRuleMockery();
+	private RegisteredUsers registeredUsers;
+	private Registry registry;
+
+	@Before
+	public void setUp () throws Exception {
+		registeredUsers = context.mock(RegisteredUsers.class);
+		registry = new Registry(registeredUsers);
+	}
 
 	@Test
 	public void register_a_user () throws AlreadyRegisteredUserException {
-		final RegisteredUsers registeredUsers = context.mock(RegisteredUsers.class);
-		final Registry registry = new Registry(registeredUsers);
 		final String userName = "user_name";
 
 		context.checking(new Expectations() {{
@@ -27,8 +34,6 @@ public class RegistryShould {
 
 	@Test(expected = AlreadyRegisteredUserException.class)
 	public void not_register_an_already_registered_user () throws AlreadyRegisteredUserException {
-		final RegisteredUsers registeredUsers = context.mock(RegisteredUsers.class);
-		final Registry registry = new Registry(registeredUsers);
 		final String userName = "user_name";
 
 		context.checking(new Expectations() {{
