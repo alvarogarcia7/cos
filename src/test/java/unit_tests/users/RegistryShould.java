@@ -17,20 +17,22 @@ public class RegistryShould {
     private RegisteredUsers registeredUsers;
     private RegistryResultListener resultListener;
     private Registry registry;
+    private String userName;
+    private User user;
 
     @Before
     public void setUp() {
         registeredUsers = context.mock(RegisteredUsers.class);
         resultListener = context.mock(RegistryResultListener.class);
         registry = new Registry(registeredUsers, resultListener);
+        userName = "user_name";
+        user = new User(userName);
     }
 
     @Test
     public void register_a_user() throws AlreadyRegisteredUserException {
-        final String userName = "user_name";
-
         context.checking(new Expectations() {{
-            oneOf(registeredUsers).add(new User(userName));
+            oneOf(registeredUsers).add(user);
 
             oneOf(resultListener).successfullyRegistered(userName);
         }});
@@ -41,9 +43,6 @@ public class RegistryShould {
     @Test
     public void not_register_an_already_registered_user() throws AlreadyRegisteredUserException {
         final Sequence registeredUsersAdditions = context.sequence("registeredUsersAdditions");
-        final String userName = "user_name";
-        final User user = new User(userName);
-
         context.checking(new Expectations() {{
             oneOf(registeredUsers).add(user); inSequence(registeredUsersAdditions);
             allowing(resultListener).successfullyRegistered(userName);
