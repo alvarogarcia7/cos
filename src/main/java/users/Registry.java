@@ -13,9 +13,9 @@ public class Registry {
 	public void register (final String userName)  {
         try {
             registeredUsers.add(new User(userName));
-            resultListener.userSuccessfullyRegistered(userName);
+            resultListener.successfullyRegistered(userName);
         } catch (AlreadyRegisteredUserException e) {
-            resultListener.alreadyRegisteredUser(userName);
+            resultListener.alreadyRegistered(userName);
         }
 	}
 }

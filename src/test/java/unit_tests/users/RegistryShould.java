@@ -32,7 +32,7 @@ public class RegistryShould {
         context.checking(new Expectations() {{
             oneOf(registeredUsers).add(new User(userName));
 
-            oneOf(resultListener).userSuccessfullyRegistered(userName);
+            oneOf(resultListener).successfullyRegistered(userName);
         }});
 
         registry.register(userName);
@@ -46,12 +46,12 @@ public class RegistryShould {
 
         context.checking(new Expectations() {{
             oneOf(registeredUsers).add(user); inSequence(registeredUsersAdditions);
-            allowing(resultListener).userSuccessfullyRegistered(userName);
+            allowing(resultListener).successfullyRegistered(userName);
 
             oneOf(registeredUsers).add(user); inSequence(registeredUsersAdditions);
             will(throwException(new AlreadyRegisteredUserException()));
 
-            oneOf(resultListener).alreadyRegisteredUser(userName);
+            oneOf(resultListener).alreadyRegistered(userName);
         }});
 
         registry.register(userName);
