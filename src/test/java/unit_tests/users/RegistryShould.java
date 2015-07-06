@@ -2,6 +2,7 @@ package unit_tests.users;
 
 import org.jmock.Expectations;
 import org.jmock.integration.junit4.JUnitRuleMockery;
+import org.jmock.Sequence;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -37,12 +38,13 @@ public class RegistryShould {
 
     @Test
     public void not_register_an_already_registered_user() throws AlreadyRegisteredUserException {
+        final Sequence registeredUsersAdditions = context.sequence("registeredUsersAdditions");
         final String userName = "user_name";
         final User user = new User(userName);
 
         context.checking(new Expectations() {{
-            exactly(1).of(registeredUsers).add(user);
-            exactly(1).of(registeredUsers).add(user);
+            exactly(1).of(registeredUsers).add(user); inSequence(registeredUsersAdditions);
+            exactly(1).of(registeredUsers).add(user); inSequence(registeredUsersAdditions);
             will(throwException(new AlreadyRegisteredUserException()));
 
             exactly(1).of(errorListener).alreadyRegisteredUser(userName);
