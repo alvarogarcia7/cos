@@ -3,18 +3,19 @@ package users;
 
 public class Registry {
 	private final RegisteredUsers registeredUsers;
-    private final RegistryErrorsListener errorListener;
+    private final RegistryResultListener resultListener;
 
-    public Registry(RegisteredUsers registeredUsers, RegistryErrorsListener errorListener) {
+    public Registry(RegisteredUsers registeredUsers, RegistryResultListener resultListener) {
 		this.registeredUsers = registeredUsers;
-        this.errorListener = errorListener;
+        this.resultListener = resultListener;
     }
 
 	public void register (final String userName)  {
         try {
             registeredUsers.add(new User(userName));
+            resultListener.userSuccessfullyRegistered(userName);
         } catch (AlreadyRegisteredUserException e) {
-            errorListener.alreadyRegisteredUser(userName);
+            resultListener.alreadyRegisteredUser(userName);
         }
 	}
 }

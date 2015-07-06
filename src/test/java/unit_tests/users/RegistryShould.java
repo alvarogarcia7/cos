@@ -15,14 +15,14 @@ public class RegistryShould {
     public JUnitRuleMockery context = new JUnitRuleMockery();
 
     private RegisteredUsers registeredUsers;
-    private RegistryErrorsListener errorListener;
+    private RegistryResultListener resultListener;
     private Registry registry;
 
     @Before
     public void setUp() {
         registeredUsers = context.mock(RegisteredUsers.class);
-        errorListener = context.mock(RegistryErrorsListener.class);
-        registry = new Registry(registeredUsers, errorListener);
+        resultListener = context.mock(RegistryResultListener.class);
+        registry = new Registry(registeredUsers, resultListener);
     }
 
     @Test
@@ -31,6 +31,8 @@ public class RegistryShould {
 
         context.checking(new Expectations() {{
             oneOf(registeredUsers).add(new User(userName));
+
+            exactly(1).of(resultListener).userSuccessfullyRegistered(userName);
         }});
 
         registry.register(userName);
@@ -44,10 +46,12 @@ public class RegistryShould {
 
         context.checking(new Expectations() {{
             exactly(1).of(registeredUsers).add(user); inSequence(registeredUsersAdditions);
+            allowing(resultListener).userSuccessfullyRegistered(userName);
+
             exactly(1).of(registeredUsers).add(user); inSequence(registeredUsersAdditions);
             will(throwException(new AlreadyRegisteredUserException()));
 
-            exactly(1).of(errorListener).alreadyRegisteredUser(userName);
+            exactly(1).of(resultListener).alreadyRegisteredUser(userName);
         }});
 
         registry.register(userName);
