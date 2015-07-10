@@ -1,4 +1,4 @@
-package unit_tests.users;
+package registry.unit_tests;
 
 import org.jmock.Expectations;
 import org.jmock.integration.junit4.JUnitRuleMockery;

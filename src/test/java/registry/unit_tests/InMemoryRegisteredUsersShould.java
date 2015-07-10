@@ -1,4 +1,4 @@
-package unit_tests.users;
+package registry.unit_tests;
 
 import org.junit.Before;
 import org.junit.Test;
