@@ -32,9 +32,9 @@ public class RegistryShould {
     @Test
     public void register_a_user() throws AlreadyRegisteredUserException {
         context.checking(new Expectations() {{
-            oneOf(registeredUsers).add(user);
+            oneOf(registeredUsers).add(user, resultListener);
 
-            oneOf(resultListener).successfullyRegistered(userName);
+//            oneOf(resultListener).successfullyRegistered(userName);
         }});
 
         registration.register(userName);
@@ -44,13 +44,11 @@ public class RegistryShould {
     public void not_register_an_already_registered_user() throws AlreadyRegisteredUserException {
         final Sequence registeredUsersAdditions = context.sequence("registeredUsersAdditions");
         context.checking(new Expectations() {{
-            oneOf(registeredUsers).add(user); inSequence(registeredUsersAdditions);
-            allowing(resultListener).successfullyRegistered(userName);
+            oneOf(registeredUsers).add(user, resultListener); inSequence(registeredUsersAdditions);
+//            allowing(resultListener).successfullyRegistered(userName);
 
-            oneOf(registeredUsers).add(user); inSequence(registeredUsersAdditions);
-            will(throwException(new AlreadyRegisteredUserException()));
-
-            oneOf(resultListener).alreadyRegistered(userName);
+            oneOf(registeredUsers).add(user, resultListener); inSequence(registeredUsersAdditions);
+//            oneOf(resultListener).alreadyRegistered(userName);
         }});
 
         registration.register(userName);

@@ -23,4 +23,8 @@ public class User {
 	public int hashCode () {
 		return userName != null ? userName.hashCode() : 0;
 	}
+
+	public String name () {
+		return userName;
+	}
 }

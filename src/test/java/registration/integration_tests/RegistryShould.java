@@ -42,6 +42,6 @@ public class RegistryShould {
 	}
 
 	private void givenAlreadyRegistered (final String userName) throws AlreadyRegisteredUserException {
-		registeredUsers.add(new User(userName));
+		registeredUsers.add(new User(userName), new InMemoryRegistryResult());
 	}
 }

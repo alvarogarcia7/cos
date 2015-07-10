@@ -10,12 +10,14 @@ public class InMemoryRegisteredUsers implements RegisteredUsers {
         users = new HashSet<User>();
     }
 
-    public void add(User user) throws AlreadyRegisteredUserException {
+    public void add (User user, final RegistryResultListener resultListener) {
         if(contains(user)) {
-            throw new AlreadyRegisteredUserException();
+            resultListener.alreadyRegistered(user.name());
+            return;
         }
 
         users.add(user);
+        resultListener.successfullyRegistered(user.name());
     }
 
     public Boolean contains(User user) {

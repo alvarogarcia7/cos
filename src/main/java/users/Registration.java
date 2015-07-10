@@ -11,11 +11,6 @@ public class Registration {
     }
 
 	public void register (final String userName)  {
-        try {
-            registeredUsers.add(new User(userName));
-            resultListener.successfullyRegistered(userName);
-        } catch (AlreadyRegisteredUserException e) {
-            resultListener.alreadyRegistered(userName);
-        }
+        registeredUsers.add(new User(userName), resultListener);
 	}
 }
