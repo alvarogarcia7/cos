@@ -38,7 +38,7 @@ public class RegistryShould {
 
 		registry.register(USER_NAME);
 
-		assertThat(result.asText(), is("Could not register user a_user"));
+		assertThat(result.asText(), is("Cannot register user a_user more than once"));
 	}
 
 	private void givenAlreadyRegistered (final String userName) throws AlreadyRegisteredUserException {
