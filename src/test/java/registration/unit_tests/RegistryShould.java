@@ -1,4 +1,4 @@
-package registry.unit_tests;
+package registration.unit_tests;
 
 import org.jmock.Expectations;
 import org.jmock.integration.junit4.JUnitRuleMockery;
@@ -16,7 +16,7 @@ public class RegistryShould {
 
     private RegisteredUsers registeredUsers;
     private RegistryResultListener resultListener;
-    private Registry registry;
+    private Registration registration;
     private String userName;
     private User user;
 
@@ -24,7 +24,7 @@ public class RegistryShould {
     public void setUp() {
         registeredUsers = context.mock(RegisteredUsers.class);
         resultListener = context.mock(RegistryResultListener.class);
-        registry = new Registry(registeredUsers, resultListener);
+        registration = new Registration(registeredUsers, resultListener);
         userName = "user_name";
         user = new User(userName);
     }
@@ -37,7 +37,7 @@ public class RegistryShould {
             oneOf(resultListener).successfullyRegistered(userName);
         }});
 
-        registry.register(userName);
+        registration.register(userName);
     }
 
     @Test
@@ -53,8 +53,8 @@ public class RegistryShould {
             oneOf(resultListener).alreadyRegistered(userName);
         }});
 
-        registry.register(userName);
-        registry.register(userName);
+        registration.register(userName);
+        registration.register(userName);
     }
 
 }

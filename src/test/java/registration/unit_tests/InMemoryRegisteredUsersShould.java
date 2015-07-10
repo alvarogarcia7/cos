@@ -1,4 +1,4 @@
-package registry.unit_tests;
+package registration.unit_tests;
 
 import org.junit.Before;
 import org.junit.Test;

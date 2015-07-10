@@ -1,11 +1,11 @@
 package users;
 
 
-public class Registry {
+public class Registration {
 	private final RegisteredUsers registeredUsers;
     private final RegistryResultListener resultListener;
 
-    public Registry(RegisteredUsers registeredUsers, RegistryResultListener resultListener) {
+    public Registration (RegisteredUsers registeredUsers, RegistryResultListener resultListener) {
 		this.registeredUsers = registeredUsers;
         this.resultListener = resultListener;
     }

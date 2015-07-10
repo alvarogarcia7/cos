@@ -1,4 +1,4 @@
-package registry.integration_tests;
+package registration.integration_tests;
 
 import users.RegistryResultListener;
 
