@@ -7,7 +7,7 @@ public class InMemoryRegistryResult implements RegistryResultListener {
 
 	@Override
 	public void alreadyRegistered (final String userName) {
-
+		lastResult = "Could not register user " + userName;
 	}
 
 	@Override
