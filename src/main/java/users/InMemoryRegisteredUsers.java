@@ -18,6 +18,11 @@ public class InMemoryRegisteredUsers implements RegisteredUsers {
         users.add(user);
     }
 
+    @Override
+    public void addFollower(User followed, User follower) {
+        
+    }
+
     public Boolean contains(User user) {
         return users.contains(user);
     }
