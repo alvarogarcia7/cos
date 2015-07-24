@@ -10,7 +10,7 @@ import users.User;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 
-public class RegistryShould {
+public class RegistrationShould {
 
 	public static final String USER_NAME = "a_user";
 	private InMemoryRegisteredUsers registeredUsers;

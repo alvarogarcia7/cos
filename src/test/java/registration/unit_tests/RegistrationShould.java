@@ -10,7 +10,7 @@ import org.junit.Test;
 import users.*;
 
 
-public class RegistryShould {
+public class RegistrationShould {
     @Rule
     public JUnitRuleMockery context = new JUnitRuleMockery();
 
